@@ -7,7 +7,8 @@ namespace ACMEcars
     {
         static void Main(string[] args)
         {
-            List<Car> myCars = new List<Car>(); 
+            List<Car> myCars = new List<Car>();
+            Car editedCar;
 
             while (true)
             {
@@ -18,7 +19,12 @@ namespace ACMEcars
                                   "S (Show all cars)\n" +
                                   "X (Exit)");
                 string option = Console.ReadLine().ToUpper();
-                
+
+                if (option == "X")
+                {
+                    break;
+                }
+
                 switch (option)
                 {
                     case "A":
@@ -36,9 +42,9 @@ namespace ACMEcars
                         Console.Clear();
                         Console.WriteLine($"New car \"{carColor} {carAge} {carModel}\" has been added!");
                         break;
-
                     case "E":
-                        Console.WriteLine("Edit existing car");
+                        Console.WriteLine("Which feature do you want to change about the car?");
+                        string feature = Console.ReadLine().ToLower();
                         break;
 
                     case "R":
@@ -46,11 +52,16 @@ namespace ACMEcars
                         break;
 
                     case "S":
-                        Console.WriteLine("Show all cars");
-                        break;
+                        Console.WriteLine("These are all the cars we currently have stored:\n");
 
-                    case "X":
-                        Console.WriteLine("Exit");
+                        foreach (Car c in myCars)
+                        {
+                            Console.WriteLine($"Number: {myCars.IndexOf(c)}\n" +
+                                              $"Model: {c.Model}\n" +
+                                              $"Year: {c.Year}\n" +
+                                              $"Color: {c.Color}\n" +
+                                              $"Price: {c.Price}\n");
+                        }
                         break;
 
                     default:
