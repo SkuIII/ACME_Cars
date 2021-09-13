@@ -28,6 +28,8 @@ namespace ACMEcars
                 switch (option)
                 {
                     case "A":
+                        Console.Clear();
+
                         Console.WriteLine("Enter the color of the car:");
                         string carColor = Console.ReadLine();
                         Console.WriteLine("Enter the price:");
@@ -42,13 +44,26 @@ namespace ACMEcars
                         Console.Clear();
                         Console.WriteLine($"New car \"{carColor} {carAge} {carModel}\" has been added!");
                         break;
+
                     case "E":
-                        Console.WriteLine("Which feature do you want to change about the car?");
-                        string feature = Console.ReadLine().ToLower();
+                        Console.WriteLine("Enter the number of the car you would like to edit " +
+                                          "(you can find the car numbers in the \"Show all cars\" section)");
                         break;
 
                     case "R":
-                        Console.WriteLine("Remove car");
+                        Console.WriteLine("Enter the number of the car you would like to remove " +
+                                          "(you can find the car numbers in the \"Show all cars\" section)");
+                        int carNumber = Convert.ToInt32(Console.ReadLine());
+
+                        if (carNumber >= myCars.Count)
+                        {
+                            Console.WriteLine($"The number {carNumber} is not associated with a car!");
+                            break;
+                        }
+
+                        myCars.RemoveAt(carNumber);
+
+                        Console.WriteLine($"Successfully removed car number {carNumber}");
                         break;
 
                     case "S":
@@ -65,7 +80,7 @@ namespace ACMEcars
                         break;
 
                     default:
-                        Console.WriteLine("You can only enter the options N, E, D, S or X!");
+                        Console.WriteLine("You can only enter the options A, E, R, S or X!");
                         break;
                 }
 
